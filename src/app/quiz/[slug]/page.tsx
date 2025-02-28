@@ -1,20 +1,13 @@
 import React from 'react';
 import QuizMain from '@/components/quiz/QuizMain';
 
-interface QuizPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-const QuizPage: React.FC<QuizPageProps> = ({ params }) => {
-  const { slug } = params;
+export default function QuizPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = React.use(params);
+  const slug = resolvedParams.slug;
 
   return (
     <div className="min-h-[100dvh] bg-gradient-to-b from-blue-50 to-white">
       <QuizMain slug={slug} />
     </div>
   );
-};
-
-export default QuizPage;
+}

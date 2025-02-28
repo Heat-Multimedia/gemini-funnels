@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 // import { createClient } from '@/lib/supabase/client';
 import {
@@ -62,13 +62,16 @@ interface QuizAnalytics {
   }[];
 }
 
-export default function QuizAnalyticsPage({ params }: { params: { id: string } }) {
+export default function QuizAnalyticsPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [analytics, setAnalytics] = useState<QuizAnalytics | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [period, setPeriod] = useState<'7' | '30' | 'all'>('7');
-  const { id } = params;
+  
+  // Usar React.use() para acessar os parâmetros de forma segura
+  const resolvedParams = React.use(params);
+  const id = resolvedParams.id;
   
   // Paleta de cores para os gráficos
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#83A6ED', '#8DD1E1', '#82CA9D'];

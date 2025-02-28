@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import React from 'react';
 
 interface LeadDetails {
   id: string;
@@ -39,12 +40,15 @@ interface LeadDetails {
   }[];
 }
 
-export default function LeadDetailsPage({ params }: { params: { id: string } }) {
+export default function LeadDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [leadDetails, setLeadDetails] = useState<LeadDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { id } = params;
+
+  // Usar React.use() para acessar os parâmetros de forma segura
+  const resolvedParams = React.use(params);
+  const id = resolvedParams.id;
 
   useEffect(() => {
     async function fetchLeadDetails() {
