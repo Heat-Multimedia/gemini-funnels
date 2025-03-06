@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { createQuizClient } from '../adapters/supabase';
 
 // TODO: Usar os tipos do módulo quando fizermos a migração completa
 // import { QuizState, EventType } from '../types';
@@ -32,7 +32,7 @@ const useQuiz = (slug?: string) => {
     totalQuestions: 16, // Total number of questions (agora desagrupadas)
   });
 
-  const supabase = createClient();
+  const supabase = createQuizClient();
 
   // Initialize quiz session
   useEffect(() => {

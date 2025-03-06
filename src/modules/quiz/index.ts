@@ -1,24 +1,22 @@
 /**
- * Módulo de Quiz - Sistema de quiz reutilizável
- * 
- * Este módulo fornece todos os componentes, hooks e utilidades
- * necessários para implementar um sistema de quiz completo.
+ * Módulo de Quiz
+ * Contém componentes, hooks e funções para implementação de quizzes interativos
  */
 
-// Exportar componentes
+// Exportações de API
+export * from './api';
+
+// Exportações de componentes
 export * from './components';
 
-// Exportar hooks
-export * from './hooks';
-
-// Exportar tipos
+// Exportações de types
 export * from './types';
 
-// Exportar adaptadores
-export * from './adapters';
+// Exportações de hooks
+export { default as useQuiz } from './hooks/useQuiz';
 
-// Exportar utilitários de template
+// Exportações de templates
 export * from './templates';
 
-// Exportar funções de API
-export * from './api'; 
+// Exportações de adapters
+export * from './adapters/supabase'; 

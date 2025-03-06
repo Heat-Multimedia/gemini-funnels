@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/client';
+import { createQuizClient } from '../adapters/supabase';
 
 /**
  * Registra um evento ocorrido durante a sessão de quiz
@@ -13,7 +13,7 @@ export async function recordSessionEventApi(sessionId: string, body: any) {
     }
     
     // Criar cliente Supabase
-    const supabase = createClient();
+    const supabase = createQuizClient();
     console.log('Cliente Supabase criado no servidor');
     
     // Inserir o evento no banco de dados
@@ -53,7 +53,7 @@ export async function recordSessionAnswerApi(sessionId: string, body: any) {
     }
     
     // Criar cliente Supabase
-    const supabase = createClient();
+    const supabase = createQuizClient();
     console.log('Cliente Supabase criado no servidor');
     
     // Inserir a resposta no banco de dados
@@ -87,7 +87,7 @@ export async function recordSessionAnswerApi(sessionId: string, body: any) {
 export async function completeSessionApi(sessionId: string) {
   try {
     // Criar cliente Supabase
-    const supabase = createClient();
+    const supabase = createQuizClient();
     
     // Atualizar o status da sessão para concluída
     const { data, error } = await supabase

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAllQuizzes, getQuizBySlug } from '../templates';
-import { createClient } from '@/lib/supabase/client';
+import { createQuizClient } from '../adapters/supabase';
 
 /**
  * Recupera todos os quizzes disponíveis e formata para API
@@ -49,7 +49,7 @@ export async function createQuizSessionApi(slug: string, body: any) {
     console.log('Quiz ID:', quiz_id, 'Slug:', slug);
 
     // Criar cliente Supabase
-    const supabase = createClient();
+    const supabase = createQuizClient();
     console.log('Supabase client created');
 
     // Verificar se o quiz existe
