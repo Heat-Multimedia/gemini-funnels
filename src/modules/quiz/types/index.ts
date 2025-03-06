@@ -54,3 +54,38 @@ export interface QuizState {
   completed: boolean;
   loading: boolean;
 }
+
+/**
+ * Definição da estrutura de um template de quiz
+ */
+export interface QuizTemplate {
+  slug: string;
+  title: string;
+  description: string;
+  questions: QuestionData[];
+  testimonials?: {
+    text: string;
+    author: string;
+  }[];
+  questionOrder: string[];
+}
+
+/**
+ * Definição da estrutura de uma questão/etapa de quiz
+ */
+export interface QuestionData {
+  id: string;
+  category?: string;
+  title?: string;
+  subtitle?: string;
+  question?: string;
+  text?: string;
+  options?: string[];
+  multiSelect?: boolean;
+  maxSelections?: number;
+  image?: string;
+  comparisonImage?: string;
+  benefits?: string[];
+  price?: string;
+  cta?: string;
+}
