@@ -2,7 +2,9 @@
  * Exporta funções de API do módulo Admin
  */
 
-// APIs serão implementadas e exportadas aqui
-// export * from './dashboard';
+// Exportando APIs do dashboard
+export * from './dashboard';
+
+// APIs futuras serão implementadas e exportadas aqui
 // export * from './quizzes';
 // export * from './leads'; 
