@@ -1,11 +1,11 @@
 // Template para quiz de Transformação Digital para Negócios
 
-import { QuestionData } from '../types';
+import { QuestionData, QuizTemplate } from '../types';
 
-export const quizTemplate = {
+export const quizTemplate: QuizTemplate = {
   slug: 'transformacao-digital-negocios',
-  title: 'Transformação Digital para Pequenos Negócios',
-  description: 'Avalie a maturidade digital da sua empresa e descubra o caminho para a transformação digital.',
+  title: 'Transformação Digital para Negócios',
+  description: 'Descubra como a tecnologia pode transformar seu negócio e aumentar seus resultados.',
   questions: [
     {
       id: 'opening',
@@ -125,6 +125,11 @@ export const quizTemplate = {
       cta: 'Quero transformar meu negócio agora!',
     },
   ],
+  questionOrder: [
+    'opening', 'business_size', 'segment', 'socialProof', 'digital_presence',
+    'digital_tools', 'challenges', 'investment', 'goals', 'testimonials',
+    'timeframe', 'commitment', 'loading', 'solution'
+  ],
   testimonials: [
     {
       text: "Aumentamos nossas vendas em 70% após implementar as estratégias digitais recomendadas!",
@@ -134,11 +139,5 @@ export const quizTemplate = {
       text: "Conseguimos reduzir custos e aumentar a produtividade com as ferramentas certas para nosso negócio.",
       author: "Luciana Mendes, Consultório Odontológico"
     }
-  ],
-  // Lista ordenada de IDs das perguntas para controle de navegação
-  questionOrder: [
-    'opening', 'business_size', 'segment', 'socialProof', 'digital_presence',
-    'digital_tools', 'challenges', 'investment', 'goals', 'testimonials',
-    'timeframe', 'commitment', 'loading', 'solution'
   ]
 };

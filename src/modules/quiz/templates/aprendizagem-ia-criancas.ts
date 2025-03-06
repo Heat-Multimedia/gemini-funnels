@@ -1,8 +1,8 @@
 // Template para quiz de Aprendizagem IA para Crianças
-import { QuestionData } from '../types';
+import { QuestionData, QuizTemplate } from '../types';
 
 // Define question types
-export const quizTemplate = {
+export const quizTemplate: QuizTemplate = {
   slug: 'aprendizagem-ia-criancas',
   title: 'Aprendizagem com IA para Crianças',
   description: 'Descubra como seu filho pode aprender mais rápido e se destacar na escola com a ajuda da inteligência artificial.',
