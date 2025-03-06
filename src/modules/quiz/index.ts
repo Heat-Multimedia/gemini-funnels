@@ -18,4 +18,7 @@ export * from './types';
 export * from './adapters';
 
 // Exportar utilitários de template
-export * from './templates'; 
+export * from './templates';
+
+// Exportar funções de API
+export * from './api'; 

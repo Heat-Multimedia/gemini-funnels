@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/client';
+import { NextRequest } from 'next/server';
+import { completeSessionApi } from '@/modules/quiz/api';
 
 export async function POST(
   req: NextRequest,
@@ -9,28 +9,11 @@ export async function POST(
     // Aguardar os parâmetros dinâmicos conforme recomendação do Next.js
     const awaitedParams = await params;
     const sessionId = awaitedParams.sessionId;
-
-    // Create supabase client
-    const supabase = createClient();
-
-    // Update the quiz session to mark it as complete
-    const { data: updatedSession, error: updatedSessionError } = await supabase
-      .from('quiz_sessions')
-      .update({ finished_at: new Date() })
-      .eq('id', sessionId)
-      .select()
-      .single();
-
-    if (updatedSessionError) {
-      console.error(updatedSessionError);
-      return NextResponse.json({ message: "Failed to complete quiz session" }, { status: 500 });
-    }
-
-    // Return the updated session
-    return NextResponse.json(updatedSession, { status: 200 });
-
+    
+    // Usar a função do módulo para completar a sessão
+    return completeSessionApi(sessionId);
   } catch (e: any) {
-    console.error(e);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    console.error('Unexpected error in route handler:', e);
+    return Response.json({ message: "Internal server error" }, { status: 500 });
   }
 }
