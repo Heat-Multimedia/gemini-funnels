@@ -14,5 +14,8 @@ export * from './hooks';
 // Exportar tipos
 export * from './types';
 
-// Exportar adapters
-export * from './adapters'; 
+// Exportar adaptadores
+export * from './adapters';
+
+// Exportar utilitários de template
+export * from './templates'; 

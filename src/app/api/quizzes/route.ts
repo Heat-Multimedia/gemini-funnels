@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getAllQuizzes } from '@/lib/quiz-loader';
+// Importando do novo módulo de quiz
+import { getAllQuizzes } from '@/modules/quiz/templates';
 
 export async function GET() {
   try {

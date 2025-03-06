@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/client';
 import { z } from 'zod';
+import { SupabaseQuizAdapter } from '@/modules/quiz';
 
 // Define the request schema
 const requestSchema = z.object({
