@@ -1,5 +1,5 @@
 import React from 'react';
-import QuizMain from '@/components/quiz/QuizMain';
+import { QuizMain } from '@/modules/quiz';
 
 export default function QuizPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = React.use(params);

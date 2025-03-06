@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import useQuiz from '@/hooks/useQuiz';
+import { useQuiz } from '../hooks';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import { QuizStep, QuizState, EventType } from '../types';
 
 // Define question types
 type QuestionData = {

@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
+// TODO: Usar os tipos do módulo quando fizermos a migração completa
+// import { QuizState, EventType } from '../types';
+
 interface QuizState {
   currentQuestionIndex: number;
   answers: { [key: string]: string };
@@ -15,6 +18,10 @@ interface QuizState {
 // Enum de tipos de eventos compatível com o backend
 type EventType = 'page_view' | 'button_click' | 'form_submit' | 'quiz_start' | 'quiz_complete' | 'step_complete' | 'step_view' | 'answer' | 'submit_lead' | 'webhook_success' | 'webhook_failure';
 
+/**
+ * Hook para gerenciar o estado e a lógica do quiz.
+ * Em uma futura refatoração, este hook usará os tipos definidos em @/modules/quiz/types
+ */
 const useQuiz = (slug?: string) => {
   const [quizState, setQuizState] = useState<QuizState>({
     currentQuestionIndex: 0,
