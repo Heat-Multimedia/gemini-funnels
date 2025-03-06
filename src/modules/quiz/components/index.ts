@@ -3,4 +3,5 @@
  */
 
 // Exportando o componente principal
-export { default as QuizMain } from './QuizMain'; 
+export { default as QuizMain } from './QuizMain';
+export * from './ui'; 

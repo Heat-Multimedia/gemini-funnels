@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useQuiz } from '../hooks';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
 import { QuizStep, QuizState, EventType } from '../types';
 
 // Define question types
