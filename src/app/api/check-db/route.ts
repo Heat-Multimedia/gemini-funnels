@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/client';
+import { createQuizClient } from '@/modules/quiz/adapters/supabase';
 import { NextResponse } from 'next/server';
+import { PostgrestError } from '@supabase/supabase-js';
 
 export async function GET() {
   try {
@@ -14,7 +15,7 @@ export async function GET() {
 
     // Criar cliente Supabase
     console.log('Criando cliente Supabase...');
-    const supabase = createClient();
+    const supabase = createQuizClient();
     console.log('Cliente Supabase criado com sucesso');
 
     // Verificação simples - listar quizzes
@@ -30,7 +31,7 @@ export async function GET() {
       console.error('Erro ao acessar quizzes:', quizzesError);
       return NextResponse.json({ 
         success: false, 
-        error: quizzesError.message,
+        error: (quizzesError as PostgrestError).message,
         env 
       }, { status: 500 });
     }
@@ -58,27 +59,27 @@ export async function GET() {
       quizzes: {
         accessible: !quizzesError,
         count: quizzes?.length || 0,
-        error: quizzesError ? quizzesError.message : null
+        error: quizzesError ? (quizzesError as PostgrestError).message : null
       },
       sessions: {
         accessible: !sessionsError,
         count: sessionsCount?.length || 0,
-        error: sessionsError ? sessionsError.message : null
+        error: sessionsError ? (sessionsError as PostgrestError).message : null
       },
       persons: {
         accessible: !personsError,
         count: personsCount?.length || 0,
-        error: personsError ? personsError.message : null
+        error: personsError ? (personsError as PostgrestError).message : null
       },
       events: {
         accessible: !eventsError,
         count: eventsCount?.length || 0,
-        error: eventsError ? eventsError.message : null
+        error: eventsError ? (eventsError as PostgrestError).message : null
       },
       answers: {
         accessible: !answersError,
         count: answersCount?.length || 0,
-        error: answersError ? answersError.message : null
+        error: answersError ? (answersError as PostgrestError).message : null
       }
     };
 

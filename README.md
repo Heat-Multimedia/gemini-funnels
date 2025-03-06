@@ -20,7 +20,17 @@ Este sistema permite criar e gerenciar funis de quiz para coleta de leads, com:
 npm install
 ```
 
-2. Configure o banco de dados Supabase:
+2. Configure as variáveis de ambiente:
+
+Crie um arquivo `.env.local` na raiz do projeto com:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=sua_url_do_supabase
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anon_do_supabase
+SUPABASE_SERVICE_ROLE_KEY=sua_chave_service_role_do_supabase
+```
+
+3. Configure o banco de dados Supabase:
 
 ```bash
 # Instalar CLI do Supabase
@@ -33,13 +43,13 @@ supabase init
 supabase migration up
 ```
 
-3. Inicie o servidor de desenvolvimento:
+4. Inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
 ```
 
-4. Acesse [http://localhost:3000](http://localhost:3000) no navegador.
+5. Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
 ## Estrutura do Projeto
 
@@ -49,16 +59,24 @@ src/
 │   ├── api/              # API Routes
 │   ├── quiz/[slug]/      # Páginas de quiz
 │   └── auth/             # Páginas de autenticação
-├── components/           # Componentes React
-│   ├── ui/               # Componentes base de UI
-│   └── quiz/             # Componentes específicos do quiz
-├── hooks/                # Hooks personalizados
+├── components/           # Componentes React compartilhados
+│   └── ui/               # Componentes base de UI
+├── modules/              # Módulos encapsulados
+│   └── quiz/             # Módulo de quiz completo
+│       ├── adapters/     # Adaptadores para serviços externos
+│       ├── api/          # Funções de API do módulo
+│       ├── components/   # Componentes específicos do quiz
+│       ├── hooks/        # Hooks do módulo
+│       ├── templates/    # Templates de quiz
+│       └── types/        # Tipos específicos do módulo
 ├── lib/                  # Utilitários compartilhados
-│   ├── supabase/         # Cliente Supabase
-│   ├── quiz-templates/   # Templates de quiz
-│   └── validation/       # Schemas de validação
-└── types/                # Tipos TypeScript
+│   └── supabase/         # Cliente Supabase global
+└── types/                # Tipos TypeScript globais
 ```
+
+## Módulo de Quiz
+
+O sistema é estruturado em torno de um módulo de quiz independente que pode ser facilmente integrado em qualquer parte da aplicação. Para mais detalhes sobre o módulo, consulte [src/modules/quiz/README.md](./src/modules/quiz/README.md).
 
 ## Banco de Dados
 
@@ -75,11 +93,12 @@ Para mais detalhes, consulte [supabase/README.md](./supabase/README.md).
 
 ## Templates de Quiz
 
-Os templates de quiz são definidos em `/src/lib/quiz-templates/` e gerenciados pelo serviço `quiz-loader.ts`. Para adicionar um novo template:
+Os templates de quiz agora são definidos em `/src/modules/quiz/templates/` e gerenciados pelo serviço de registro do módulo. Para adicionar um novo template:
 
 1. Crie um novo arquivo no diretório de templates
-2. Defina as etapas, perguntas e opções de resposta
-3. O novo quiz será automaticamente registrado e disponível na plataforma
+2. Defina as etapas, perguntas e opções de resposta seguindo o tipo `QuizTemplate`
+3. Registre o template usando `registerQuizTemplate`
+4. O novo quiz será automaticamente disponível na plataforma
 
 ## Desenvolvimento
 
