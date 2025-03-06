@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { getAllQuizzes, getQuizBySlug } from '../templates';
 import { createQuizClient } from '../adapters/supabase';
 
 /**
@@ -8,93 +7,96 @@ import { createQuizClient } from '../adapters/supabase';
 export async function getAllQuizzesApi() {
   try {
     // Carregar quizzes do sistema de templates
-    const quizzes = getAllQuizzes();
+    // const quizzes = getAllQuizzes();
     
     // Transformar em formato para API
-    const formattedQuizzes = quizzes.map(quiz => ({
-      id: quiz.slug, // Usar slug como id
-      title: quiz.title,
-      description: quiz.description,
-      slug: quiz.slug,
-      created_at: new Date().toISOString(), // Data atual como placeholder
-    }));
+    // const formattedQuizzes = quizzes.map(quiz => ({
+    //   id: quiz.slug, // Usar slug como id
+    //   title: quiz.title,
+    //   description: quiz.description,
+    // }));
     
-    return NextResponse.json({ 
-      success: true, 
-      data: formattedQuizzes 
-    }, { status: 200 });
-  } catch (error: any) {
-    console.error('Erro inesperado ao buscar quizzes:', error);
-    return NextResponse.json({ 
-      success: false, 
-      error: error.message 
-    }, { status: 500 });
+    // Por enquanto, retornar quizzes do banco de dados
+    // Criar cliente Supabase
+    const supabase = createQuizClient();
+    console.log('Supabase client created');
+    
+    const { data, error } = await supabase
+      .from('quizzes')
+      .select('id, title, slug, description');
+      
+    if (error) {
+      console.error('Erro ao carregar quizzes:', error);
+      return NextResponse.json({ error: 'Erro ao carregar quizzes' }, { status: 500 });
+    }
+    
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Erro ao processar requisição:', error);
+    return NextResponse.json({ error: 'Erro interno do servidor' }, { status: 500 });
   }
 }
 
 /**
- * Cria uma nova sessão para um quiz
+ * Cria uma nova sessão para um quiz com o slug especificado
  */
 export async function createQuizSessionApi(slug: string, body: any) {
   try {
-    // Validar o corpo da requisição
-    if (!body || !body.quiz_id) {
-      return NextResponse.json({ message: "ID do quiz é obrigatório" }, { status: 400 });
-    }
-
-    console.log('Creating session for quiz with slug:', slug);
-    console.log('Request body:', body);
+    console.log(`Creating session for quiz with slug: ${slug}`);
+    console.log(`Request body:`, body);
     
-    const quiz_id = body.quiz_id;
-    console.log('Quiz ID:', quiz_id, 'Slug:', slug);
-
+    // Extrair quiz_id do body
+    const { quiz_id } = body;
+    
+    // Validação básica
+    if (!quiz_id) {
+      console.log('Quiz ID not provided');
+      return NextResponse.json({ error: 'Quiz ID is required' }, { status: 400 });
+    }
+    
+    console.log(`Quiz ID: ${quiz_id} Slug: ${slug}`);
+    
     // Criar cliente Supabase
     const supabase = createQuizClient();
     console.log('Supabase client created');
-
+    
     // Verificar se o quiz existe
-    console.log('Checking if quiz exists with slug:', slug);
-    const { data: quiz, error: quizError } = await supabase
+    console.log(`Checking if quiz exists with slug: ${slug}`);
+    const { data: quizData, error: quizError } = await supabase
       .from('quizzes')
       .select('*')
       .eq('slug', slug)
       .single();
-
-    console.log('Quiz data:', quiz);
+      
+    if (quizError || !quizData) {
+      console.error('Quiz not found:', quizError);
+      return NextResponse.json({ error: 'Quiz not found' }, { status: 404 });
+    }
     
-    if (quizError) {
-      console.error('Error fetching quiz:', quizError);
-      return NextResponse.json({ message: "Falha ao buscar quiz" }, { status: 500 });
-    }
-
-    if (!quiz) {
-      console.log('Quiz not found with slug:', slug);
-      return NextResponse.json({ message: "Quiz não encontrado" }, { status: 404 });
-    }
-
-    // Criar uma nova sessão com o passo inicial
-    console.log('Creating new quiz session with quiz ID:', quiz.id);
-    const { data: session, error: sessionError } = await supabase
+    console.log('Quiz data:', quizData);
+    
+    // Criar nova sessão
+    console.log(`Creating new quiz session with quiz ID: ${quiz_id}`);
+    const { data: sessionData, error: sessionError } = await supabase
       .from('quiz_sessions')
       .insert({
-        quiz_id: quiz.id,
-        session_token: crypto.randomUUID(),
-        current_step: 'intro' // Inicializar com um valor padrão
+        quiz_id,
+        current_step: 'intro',
+        session_token: crypto.randomUUID()
       })
-      .select()
+      .select('*')
       .single();
-
+      
     if (sessionError) {
-      console.error('Error creating quiz session:', sessionError);
-      return NextResponse.json({ message: "Falha ao criar sessão de quiz" }, { status: 500 });
+      console.error('Error creating session:', sessionError);
+      return NextResponse.json({ error: 'Failed to create session' }, { status: 500 });
     }
-
-    console.log('Session created successfully:', session);
     
-    // Retornar a nova sessão
-    return NextResponse.json(session, { status: 201 });
-  } catch (e: any) {
-    console.error('Unexpected error:', e);
-    return NextResponse.json({ message: "Erro interno do servidor" }, { status: 500 });
+    console.log('Session created successfully:', sessionData);
+    
+    return NextResponse.json(sessionData, { status: 201 });
+  } catch (error) {
+    console.error('Error processing request:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 } 

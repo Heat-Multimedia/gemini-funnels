@@ -1,6 +1,6 @@
 // Template para quiz de Transformação Digital para Negócios
 
-import { QuestionData } from './aprendizagem-ia-criancas';
+import { QuestionData } from '../types';
 
 export const quizTemplate = {
   slug: 'transformacao-digital-negocios',

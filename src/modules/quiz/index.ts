@@ -15,8 +15,5 @@ export * from './types';
 // Exportações de hooks
 export { default as useQuiz } from './hooks/useQuiz';
 
-// Exportações de templates
-export * from './templates';
-
 // Exportações de adapters
 export * from './adapters/supabase'; 
