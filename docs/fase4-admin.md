@@ -24,11 +24,21 @@ Esta fase concluiu a modularização do módulo admin, com a implementação de 
   - Espaço reservado para visualização futura da jornada do usuário
   - Tratamento de estados de carregamento e erro
 
+### LeadsList
+- **Arquivo**: `src/modules/admin/components/LeadsList.tsx`
+- **Funcionalidade**: Listagem e busca de leads capturados
+- **Recursos**:
+  - Visualização em tabela com paginação
+  - Busca por nome ou email
+  - Exportação para CSV
+  - Estado vazio, de carregamento e de erro
+  - Suporte para visualização detalhada via callback
+
 ## Estruturação e Exportações
 
 ### Arquivos de Índice
 - **Componentes**: `src/modules/admin/components/index.ts`
-  - Exporta todos os componentes principais implementados (Dashboard, QuizzesList, LeadDetail)
+  - Exporta todos os componentes principais implementados (Dashboard, QuizzesList, LeadDetail, LeadsList)
   
 - **API**: `src/modules/admin/api/index.ts`
   - Exporta todas as funções de API (dashboard, quizzes, leads)
@@ -50,6 +60,7 @@ Esta fase concluiu a modularização do módulo admin, com a implementação de 
 ### Erros de Tipagem
 - Correção das interfaces em `types.ts` para incluir todas as propriedades necessárias
 - Adição de propriedades opcionais em interfaces como `Lead` para exibição de informações detalhadas
+- Alinhamento correto com as interfaces da API para busca de leads
 
 ### Erros de Importação
 - Organização correta de exportações nos arquivos de índice
@@ -58,15 +69,15 @@ Esta fase concluiu a modularização do módulo admin, com a implementação de 
 ## Próximos Passos
 
 ### Melhorias Pendentes
-1. **Componente LeadsList**: Implementar visualização completa da lista de leads
-2. **Testes Automatizados**: Criar testes unitários e de integração para cada componente
-3. **Integração com o Módulo de Quiz**: Assegurar comunicação apropriada entre os módulos
+1. **Testes Automatizados**: Criar testes unitários e de integração para cada componente
+2. **Integração com o Módulo de Quiz**: Assegurar comunicação apropriada entre os módulos
+3. **Implementação do QuizEditor**: Componente para edição mais avançada dos quizzes, incluindo passos e perguntas
 
 ### Aprimoramentos Potenciais
 1. **Filtragem Avançada**: Adicionar filtros e busca avançada para leads e quizzes
 2. **Visualização de Jornada**: Implementar visualização da jornada completa do usuário
 3. **Dashboard Personalizado**: Permitir personalização dos dados exibidos no dashboard
-4. **Exportação de Dados**: Adicionar funcionalidade para exportar leads e estatísticas
+4. **Exportação de Dados**: Aprimorar funcionalidades para exportar leads e estatísticas
 
 ## Melhorias na Arquitetura
 
@@ -83,4 +94,4 @@ Esta fase concluiu a modularização do módulo admin, com a implementação de 
 - Separação clara entre UI e lógica de negócios
 
 ## Conclusão
-A modularização do Admin está tecnicamente completa, com todos os componentes principais implementados. Os arquivos estão organizados de maneira lógica e as exportações estão configuradas corretamente. A estrutura atual proporciona boa manutenibilidade e extensibilidade para o futuro. 
+A modularização do Admin está tecnicamente completa, com todos os componentes principais implementados. Os arquivos estão organizados de maneira lógica e as exportações estão configuradas corretamente. Com a implementação do LeadsList, o fluxo de visualização e gerenciamento de leads está completo, possibilitando que os usuários administradores visualizem, busquem e exportem leads de forma eficiente. A estrutura atual proporciona boa manutenibilidade e extensibilidade para o futuro. 
