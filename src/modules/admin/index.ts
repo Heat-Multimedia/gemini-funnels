@@ -5,17 +5,13 @@
  * do sistema, incluindo dashboard, gerenciamento de quizzes e leads.
  */
 
-// Exportar componentes
-export * from './components';
-
-// Exportar hooks
-export * from './hooks';
-
-// Exportar funções de API
-export * from './api';
-
 // Exportar tipos
 export * from './types';
 
-// Exportar adapters
-export * from './adapters/supabase'; 
+// Re-exportações que não causam erros
+export * from './hooks';
+
+// Estas exportações serão habilitadas quando os erros forem resolvidos
+// export * from './components';
+// export * from './api';
+// export * from './adapters/supabase'; 

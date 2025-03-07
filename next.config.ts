@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
     
     return config;
   },
+  
+  // Configuração do experimental para o turbopack
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        '@/modules': path.resolve(__dirname, 'src/modules'),
+      },
+    },
+  },
 };
 
 export default nextConfig;
