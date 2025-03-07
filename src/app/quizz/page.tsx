@@ -3,11 +3,10 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import type { Database } from '@/types/supabase';
 
 async function getQuizzes() {
   try {
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = createServerComponentClient({ cookies });
     
     const { data: quizzes, error } = await supabase
       .from('quizzes')
@@ -44,7 +43,7 @@ export default async function QuizzesPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {quizzes.map((quiz) => (
+              {quizzes.map((quiz: any) => (
                 <div key={quiz.id} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{quiz.title}</h3>
                   <p className="text-gray-600 mb-6 h-20 overflow-hidden">{quiz.description}</p>
