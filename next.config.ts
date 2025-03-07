@@ -21,8 +21,6 @@ const nextConfig: NextConfig = {
         '@/modules': path.resolve(__dirname, 'src/modules'),
       },
     },
-    // Outras configurações experimentais
-    esmExternals: 'loose',
   },
 };
 
