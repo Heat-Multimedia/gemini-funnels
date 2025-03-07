@@ -740,7 +740,7 @@ const QuizMain: React.FC<QuizMainProps> = ({ slug }) => {
   };
 
   return (
-    <div className="relative flex flex-col min-h-[100dvh] py-2 px-4">
+    <div data-testid="quiz-main" data-slug={slug} className="relative flex flex-col min-h-[100dvh] py-2 px-4">
       {/* Progress bar */}
       {quizState.currentQuestionIndex > 0 && quizState.currentQuestionIndex < questions.length - 1 && (
         <ProgressBar 
