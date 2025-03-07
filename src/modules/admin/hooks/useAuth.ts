@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
 import { createAdminClient, checkAdminAuth } from '../adapters/supabase';

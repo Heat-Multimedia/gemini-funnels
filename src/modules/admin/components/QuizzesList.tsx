@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { getQuizzes } from '../api/quizzes';
 import { AdminQuiz } from '../types';

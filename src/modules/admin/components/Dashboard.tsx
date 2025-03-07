@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDashboard } from '../hooks/useDashboard';
 import Card from './ui/Card';
