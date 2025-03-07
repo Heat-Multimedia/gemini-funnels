@@ -4,7 +4,7 @@ import path from "path";
 const nextConfig: NextConfig = {
   /* config options here */
   webpack: (config) => {
-    // Configuração para resolver módulos
+    // Configuração para resolver módulos com Webpack
     config.resolve.alias = {
       ...config.resolve.alias,
       '@/modules': path.resolve(__dirname, 'src/modules'),
@@ -15,11 +15,14 @@ const nextConfig: NextConfig = {
   
   // Configuração do experimental para o turbopack
   experimental: {
+    // Habilitar Turbopack
     turbo: {
       resolveAlias: {
         '@/modules': path.resolve(__dirname, 'src/modules'),
       },
     },
+    // Outras configurações experimentais
+    esmExternals: 'loose',
   },
 };
 

@@ -3,6 +3,7 @@ import QuizClient from './page.client';
 
 /**
  * Página de teste para verificar o funcionamento do módulo de quiz
+ * Usa um componente cliente para renderizar a interface interativa
  */
 export default function TestModulePage() {
   return (

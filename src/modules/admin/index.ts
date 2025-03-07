@@ -8,10 +8,19 @@
 // Exportar tipos
 export * from './types';
 
-// Re-exportações que não causam erros
+// Exportar hooks
 export * from './hooks';
 
-// Estas exportações serão habilitadas quando os erros forem resolvidos
-// export * from './components';
-// export * from './api';
-// export * from './adapters/supabase'; 
+// Exportar componentes específicos em vez de todo o diretório
+export { Dashboard } from './components';
+export { QuizzesList } from './components';
+export { LeadDetail } from './components';
+export { LeadsList } from './components';
+
+// Exportar funções de API específicas
+export { getDashboardStats } from './api/dashboard';
+export { getQuizzes, getQuizById, updateQuiz } from './api/quizzes';
+export { getLeads, getLeadById, getLeadAnswers } from './api/leads';
+
+// Exportar adaptadores específicos
+export { createAdminClient } from './adapters/supabase'; 

@@ -3,17 +3,23 @@
  * Contém componentes, hooks e funções para implementação de quizzes interativos
  */
 
-// Exportação direta do componente principal
+// Exportação direta dos componentes principais
 export { default as QuizMain } from './components/QuizMain';
 
 // Exportações de tipos
 export * from './types';
 
-// Exportação dos componentes de UI
+// Exportação de hooks específicos
+export { default as useQuiz } from './hooks/useQuiz';
+
+// Exportações de componentes UI
 export * from './components/ui';
 
-// Exportações de hooks
-export { default as useQuiz } from './hooks/useQuiz';
+// Exportações de API
+export * from './api';
+
+// Exportações de adapters
+export { createQuizClient } from './adapters/supabase';
 
 // Outras exportações serão habilitadas quando os arquivos forem verificados
 // export * from './api';
