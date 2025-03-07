@@ -1,19 +1,21 @@
 /**
  * Módulo Admin
- * Contém componentes, hooks e funções para o painel administrativo
+ * 
+ * Este módulo contém todas as funcionalidades relacionadas à administração 
+ * do sistema, incluindo dashboard, gerenciamento de quizzes e leads.
  */
 
-// Exportações de componentes
+// Exportar componentes
 export * from './components';
 
-// Exportações de tipos
-export * from './types';
+// Exportar hooks
+export * from './hooks';
 
-// Exportações de hooks
-// (serão adicionados posteriormente)
-
-// Exportações de API
+// Exportar funções de API
 export * from './api';
 
-// Exportações de adapters
+// Exportar tipos
+export * from './types';
+
+// Exportar adapters
 export * from './adapters/supabase'; 

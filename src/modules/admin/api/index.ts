@@ -9,8 +9,4 @@ export * from './dashboard';
 export * from './quizzes';
 
 // Exportando APIs de leads
-export * from './leads';
-
-// APIs futuras serão implementadas e exportadas aqui
-// export * from './quizzes';
-// export * from './leads'; 
+export * from './leads'; 

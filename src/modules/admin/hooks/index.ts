@@ -3,7 +3,7 @@
  */
 
 // Exporta hook de autenticação
-export { useAuth } from './useAuth';
+export * from './useAuth';
 
 // Exporta hook de dashboard
-export { useDashboard } from './useDashboard'; 
+export * from './useDashboard'; 
