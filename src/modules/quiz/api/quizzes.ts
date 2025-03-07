@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createQuizClient } from '../adapters/supabase';
+import { Quiz } from '../types';
 
 /**
  * Recupera todos os quizzes disponíveis e formata para API
@@ -98,5 +99,59 @@ export async function createQuizSessionApi(slug: string, body: any) {
   } catch (error) {
     console.error('Error processing request:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
+/**
+ * Busca todos os quizzes disponíveis
+ * 
+ * @returns Array de quizzes organizados por data de criação decrescente
+ */
+export async function getQuizzes(): Promise<Quiz[]> {
+  try {
+    const client = createQuizClient();
+    
+    const { data, error } = await client
+      .from('quizzes')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error('Erro ao buscar quizzes:', error);
+      throw new Error('Falha ao buscar quizzes');
+    }
+    
+    return data || [];
+  } catch (err) {
+    console.error('Erro em getQuizzes:', err);
+    return [];
+  }
+}
+
+/**
+ * Busca um quiz pelo slug
+ * 
+ * @param slug O slug do quiz a ser buscado
+ * @returns O quiz encontrado ou null se não existir
+ */
+export async function getQuizBySlug(slug: string): Promise<Quiz | null> {
+  try {
+    const client = createQuizClient();
+    
+    const { data, error } = await client
+      .from('quizzes')
+      .select('*')
+      .eq('slug', slug)
+      .single();
+    
+    if (error) {
+      console.error(`Erro ao buscar quiz com slug ${slug}:`, error);
+      return null;
+    }
+    
+    return data;
+  } catch (err) {
+    console.error(`Erro em getQuizBySlug para ${slug}:`, err);
+    return null;
   }
 } 

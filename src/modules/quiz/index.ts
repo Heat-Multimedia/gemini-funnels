@@ -21,6 +21,9 @@ export * from './api';
 // Exportações de adapters
 export { createQuizClient } from './adapters/supabase';
 
+// Exportações de páginas
+export * from './pages';
+
 // Outras exportações serão habilitadas quando os arquivos forem verificados
 // export * from './api';
 // export * from './adapters/supabase'; 

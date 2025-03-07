@@ -21,7 +21,12 @@ export interface Quiz {
   id: string;
   title: string;
   slug: string;
+  description: string;
   steps: QuizStep[];
+  created_at?: string;
+  updated_at?: string;
+  final_url?: string | null;
+  webhook_url?: string | null;
 }
 
 /**
