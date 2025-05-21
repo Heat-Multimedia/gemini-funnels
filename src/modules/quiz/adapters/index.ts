@@ -2,5 +2,5 @@
  * Exporta os adapters do módulo de quiz
  */
 
-// Exportando o adapter para Supabase
-export { SupabaseQuizAdapter } from './supabase'; 
+// Exportando o cliente Supabase utilizado pelo módulo de quiz
+export { createQuizClient } from './supabase';
