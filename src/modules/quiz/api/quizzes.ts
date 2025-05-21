@@ -3,22 +3,12 @@ import { createQuizClient } from '../adapters/supabase';
 import { Quiz } from '../types';
 
 /**
- * Recupera todos os quizzes disponíveis e formata para API
+ * Recupera todos os quizzes disponíveis diretamente do banco de dados e
+ * retorna em formato de resposta JSON.
  */
 export async function getAllQuizzesApi() {
   try {
-    // Carregar quizzes do sistema de templates
-    // const quizzes = getAllQuizzes();
-    
-    // Transformar em formato para API
-    // const formattedQuizzes = quizzes.map(quiz => ({
-    //   id: quiz.slug, // Usar slug como id
-    //   title: quiz.title,
-    //   description: quiz.description,
-    // }));
-    
-    // Por enquanto, retornar quizzes do banco de dados
-    // Criar cliente Supabase
+    // Recupera quizzes diretamente do banco de dados
     const supabase = createQuizClient();
     console.log('Supabase client created');
     
